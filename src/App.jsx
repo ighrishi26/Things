@@ -1,4 +1,7 @@
-import { useEffect, useState } from "react";
+import {
+  useEffect,
+  useState
+} from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Navbar from "./components/Navbar";
@@ -19,6 +22,7 @@ import About from "./pages/About";
 import Help from "./pages/Help";
 import Privacy from "./pages/Privacy";
 import Terms from "./pages/Terms";
+import PageTitle from "./components/PageTitle";
 import NotFound from "./pages/NotFound";
 
 import "./App.css";
@@ -67,8 +71,9 @@ function App() {
 
   return (
     <BrowserRouter>
+  <PageTitle />
 
-      <LoadingScreen />
+  <LoadingScreen />
 
       <Navbar
         theme={theme}
