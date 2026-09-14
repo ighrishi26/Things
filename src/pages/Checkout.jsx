@@ -40,6 +40,7 @@ function Checkout() {
   });
 
   const [errors, setErrors] = useState({});
+  const [placingOrder, setPlacingOrder] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -119,11 +120,18 @@ function Checkout() {
   };
 
   const placeOrder = (e) => {
-    e.preventDefault();
 
-    if (!validateForm()) {
-      return;
-    }
+  e.preventDefault();
+
+  if (placingOrder) {
+    return;
+  }
+
+  if (!validateForm()) {
+    return;
+  }
+
+  setPlacingOrder(true);
 
     const existingOrders =
       JSON.parse(
@@ -294,13 +302,27 @@ function Checkout() {
                 </label>
 
                 <input
-                  type="tel"
-                  name="phone"
-                  placeholder="10-digit mobile number"
-                  maxLength="10"
-                  value={form.phone}
-                  onChange={handleChange}
-                />
+  type="tel"
+  name="phone"
+  placeholder="10-digit mobile number"
+  maxLength="10"
+  value={form.phone}
+  onChange={(e) => {
+    const value = e.target.value
+      .replace(/\D/g, "")
+      .slice(0, 10);
+
+    setForm((current) => ({
+      ...current,
+      phone: value
+    }));
+
+    setErrors((current) => ({
+      ...current,
+      phone: ""
+    }));
+  }}
+/>
 
                 {errors.phone && (
                   <small>
@@ -374,13 +396,27 @@ function Checkout() {
                 </label>
 
                 <input
-                  type="text"
-                  name="pincode"
-                  placeholder="6-digit pincode"
-                  maxLength="6"
-                  value={form.pincode}
-                  onChange={handleChange}
-                />
+  type="text"
+  name="pincode"
+  placeholder="6-digit pincode"
+  maxLength="6"
+  value={form.pincode}
+  onChange={(e) => {
+    const value = e.target.value
+      .replace(/\D/g, "")
+      .slice(0, 6);
+
+    setForm((current) => ({
+      ...current,
+      pincode: value
+    }));
+
+    setErrors((current) => ({
+      ...current,
+      pincode: ""
+    }));
+  }}
+/>
 
                 {errors.pincode && (
                   <small>
@@ -535,11 +571,14 @@ function Checkout() {
           </div>
 
           <button
-            type="submit"
-            className="place-order-button"
-          >
-            Place Order
-          </button>
+  type="submit"
+  className="place-order-button"
+  disabled={placingOrder}
+>
+  {placingOrder
+    ? "Placing Order..."
+    : "Place Order"}
+</button>
 
           <div className="checkout-security">
 

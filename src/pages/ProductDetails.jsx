@@ -97,10 +97,10 @@ function ProductDetails({ showToast }) {
     .slice(0, 4);
 
   const increaseQuantity = () => {
-    setQuantity(
-      (current) => current + 1
-    );
-  };
+  setQuantity(
+    (current) => Math.min(current + 1, 20)
+  );
+};
 
   const decreaseQuantity = () => {
     setQuantity(
@@ -303,25 +303,35 @@ function ProductDetails({ showToast }) {
 
               <div className="details-quantity">
 
-                <button
-                  type="button"
-                  onClick={decreaseQuantity}
-                >
-                  −
-                </button>
+  <button
+    type="button"
+    onClick={decreaseQuantity}
+  >
+    −
+  </button>
 
-                <span>
-                  {quantity}
-                </span>
+  <input
+  type="number"
+  min="1"
+  max="20"
+  value={quantity}
+  onChange={(e) => {
+    const value = Number(e.target.value);
 
-                <button
-                  type="button"
-                  onClick={increaseQuantity}
-                >
-                  +
-                </button>
+    if (value >= 1 && value <= 20) {
+      setQuantity(value);
+    }
+  }}
+/>
 
-              </div>
+  <button
+    type="button"
+    onClick={increaseQuantity}
+  >
+    +
+  </button>
+
+</div>
 
               <span className="details-stock">
                 ✓ In Stock

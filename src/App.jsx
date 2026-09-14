@@ -8,6 +8,7 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Toast from "./components/Toast";
 import LoadingScreen from "./components/LoadingScreen";
+import NavigationLoader from "./components/NavigationLoader";
 
 import Home from "./pages/Home";
 import Shop from "./pages/Shop";
@@ -23,6 +24,8 @@ import Help from "./pages/Help";
 import Privacy from "./pages/Privacy";
 import Terms from "./pages/Terms";
 import PageTitle from "./components/PageTitle";
+import ScrollToTop from "./components/ScrollToTop";
+import BackToTop from "./components/BackToTop";
 import NotFound from "./pages/NotFound";
 
 import "./App.css";
@@ -72,6 +75,8 @@ function App() {
   return (
     <BrowserRouter>
   <PageTitle />
+  <ScrollToTop />
+  <NavigationLoader />
 
   <LoadingScreen />
 
@@ -112,7 +117,7 @@ function App() {
         message={toastMessage}
         onClose={() => setToastMessage("")}
       />
-
+  <BackToTop />
     </BrowserRouter>
   );
 }

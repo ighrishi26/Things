@@ -9508,3 +9508,136 @@ body[data-theme="light"] .loading-line {
 body[data-theme="light"] .loading-content p {
   color: #777;
 }
+
+.navigation-loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  z-index: 10000;
+  overflow: hidden;
+  background: transparent;
+}
+
+.navigation-loader-bar {
+  width: 35%;
+  height: 100%;
+  background: #e50914;
+  animation: navigationLoading 0.35s ease-in-out;
+}
+
+@keyframes navigationLoading {
+  0% {
+    transform: translateX(-100%);
+  }
+
+  100% {
+    transform: translateX(300%);
+  }
+}
+
+.back-to-top {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  z-index: 1000;
+  width: 46px;
+  height: 46px;
+  border: 1px solid #333;
+  border-radius: 50%;
+  background: #111;
+  color: #fff;
+  font-size: 22px;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.back-to-top:hover {
+  background: #e50914;
+  border-color: #e50914;
+  transform: translateY(-3px);
+}
+
+body[data-theme="light"] .back-to-top {
+  background: #fff;
+  color: #111;
+  border-color: #ddd;
+}
+
+body[data-theme="light"] .back-to-top:hover {
+  background: #e50914;
+  color: #fff;
+  border-color: #e50914;
+}
+
+@media (max-width: 600px) {
+  .back-to-top {
+    right: 16px;
+    bottom: 16px;
+    width: 42px;
+    height: 42px;
+  }
+}
+
+.details-quantity input {
+  width: 40px;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: inherit;
+  text-align: center;
+  font-size: 15px;
+  font-weight: 600;
+  appearance: textfield;
+}
+
+.details-quantity input::-webkit-outer-spin-button,
+.details-quantity input::-webkit-inner-spin-button {
+  appearance: none;
+  margin: 0;
+}
+
+body[data-theme="light"] .details-quantity input {
+  color: #111;
+}
+
+.place-order-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.place-order-button {
+  position: relative;
+  overflow: hidden;
+  transition:
+    transform 0.2s ease,
+    opacity 0.2s ease,
+    background 0.2s ease;
+}
+
+.place-order-button:not(:disabled):hover {
+  transform: translateY(-2px);
+}
+
+.place-order-button:disabled::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.12);
+  animation: checkoutLoading 1s linear infinite;
+}
+
+@keyframes checkoutLoading {
+  0% {
+    left: -100%;
+  }
+
+  100% {
+    left: 150%;
+  }
+}
